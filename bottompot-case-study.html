@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Study — Bottom Pot × Rubicon Live Kitchen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C06A;
+      --gold-dim: #8a6d28;
+      --dark: #0d0c0a;
+      --dark-2: #141310;
+      --dark-3: #1c1a16;
+      --dark-4: #252219;
+      --smoke: #9b9488;
+      --cream: #f0ead8;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 6rem 6vw 5rem;
+      position: relative;
+      border-bottom: 1px solid #2a2720;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(201,168,76,0.07) 0%, transparent 70%),
+        var(--dark);
+    }
+
+    .hero-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 7.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      max-width: 16ch;
+      color: var(--cream);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      border-top: 1px solid #2a2720;
+      padding-top: 2rem;
+      margin-top: 1rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .hero-meta-item span:first-child {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+    }
+
+    .hero-meta-item span:last-child {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--gold-light);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+      margin: 0;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 6vw;
+    }
+
+    section + section {
+      border-top: 1px solid #1e1c17;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      display: inline-block;
+      flex: 1;
+      max-width: 3rem;
+      height: 1px;
+      background: var(--gold-dim);
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 2.5rem;
+    }
+
+    h2 em { font-style: italic; color: var(--gold-light); }
+
+    h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #c5bfad;
+      max-width: 68ch;
+      margin-bottom: 1.5rem;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ── TWO-COLUMN ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    @media (max-width: 780px) {
+      .two-col { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-left: 2px solid var(--gold);
+      padding: 1.5rem 0 1.5rem 2.5rem;
+      margin: 4rem 0;
+      max-width: 54ch;
+    }
+
+    .pull-quote blockquote {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    .pull-quote cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      font-style: normal;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+      border-left: 1px solid #2a2720;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3.5rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.85rem;
+      top: 0.4rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(201,168,76,0.4);
+    }
+
+    .timeline-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-item h3 { margin-bottom: 0.5rem; }
+    .timeline-item p { max-width: 54ch; }
+
+    /* ── STATS GRID ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0;
+      border: 1px solid #2a2720;
+      margin-top: 4rem;
+    }
+
+    .stat-box {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid #2a2720;
+      border-bottom: 1px solid #2a2720;
+      transition: background 0.3s ease;
+    }
+
+    .stat-box:hover { background: var(--dark-3); }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--smoke);
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: var(--dark-3);
+      border: 1px solid #2a2720;
+      border-left: 3px solid var(--gold);
+      padding: 2.5rem 3rem;
+      margin: 3rem 0;
+    }
+
+    .highlight-box h3 {
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+
+    /* ── MODEL CARDS ── */
+    .model-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .model-card {
+      background: var(--dark-3);
+      border: 1px solid #2a2720;
+      padding: 2rem 1.75rem;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .model-card:hover {
+      border-color: var(--gold-dim);
+      transform: translateY(-3px);
+    }
+
+    .model-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .model-card h3 {
+      font-size: 1rem;
+      font-family: var(--sans);
+      font-weight: 500;
+      color: var(--cream);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .model-card p {
+      font-size: 0.88rem;
+      color: var(--smoke);
+      line-height: 1.6;
+      margin: 0;
+      max-width: none;
+    }
+
+    /* ── VISION SECTION ── */
+    .vision-bg {
+      background:
+        radial-gradient(ellipse 100% 80% at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+        var(--dark-2);
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 8rem 6vw;
+      background: var(--dark-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      max-width: 20ch;
+      margin: 0 auto 1.5rem;
+    }
+
+    .cta-section p {
+      max-width: 50ch;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .cta-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--gold-dim);
+      color: var(--gold-light);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.07);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 6vw;
+      border-top: 1px solid #1e1c17;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-note {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--smoke);
+      text-transform: uppercase;
+    }
+
+    /* ── LARGE BACKGROUND TEXT ── */
+    .bg-text {
+      position: absolute;
+      font-family: var(--serif);
+      font-size: clamp(6rem, 18vw, 16rem);
+      font-weight: 700;
+      color: rgba(201,168,76,0.03);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    /* ── CHEF BADGE ── */
+    .chef-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--dark-3);
+      border: 1px solid #2a2720;
+      padding: 0.75rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chef-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .chef-badge span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<header class="hero">
+  <div class="hero-label">Bottom Pot Case Study — Port Harcourt, Nigeria</div>
+
+  <h1>
+    From a Cooking Test<br/>
+    to a <em>Weekly Live<br/>
+    Kitchen</em> — in Under<br/>
+    30 Days.
+  </h1>
+
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span>Subject</span>
+      <span>Bottom Pot × Rubicon Restaurant</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Location</span>
+      <span>Trans Amadi, Port Harcourt</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Launch Target</span>
+      <span>April 18, 2026</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Stage</span>
+      <span>Pre-Launch — Forward Projection</span>
+    </div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ CONTEXT ═══════════════════════════════ -->
+<section>
+  <div class="section-label">01 — The Problem</div>
+  <div class="two-col">
+    <div class="reveal">
+      <h2>Port Harcourt's Food Scene Has Energy. <em>It Lacks Infrastructure.</em></h2>
+    </div>
+    <div class="reveal">
+      <p>Port Harcourt is one of Nigeria's most commercially active cities — oil money, night life, a food culture rooted in Niger Delta tradition. But beneath the surface, most food businesses operate on instinct. No structured costing. No digital ordering. No data. No loyalty systems.</p>
+      <p>Restaurant owners work long hours with tight margins and no tools built for their context. Customers love the food but have no way to track orders, earn rewards, or know what's coming next.</p>
+      <p>And when a restaurant wants to grow — wants to become an experience, not just a meal — there is no operational backbone to support that ambition. Until now.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>"The food is great. The system behind it is missing."</blockquote>
+    <cite>The founding insight behind Bottom Pot</cite>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PROTAGONIST ═══════════════════════════════ -->
+<section style="background: var(--dark-2); position: relative; overflow: hidden;">
+  <span class="bg-text" style="bottom: -2rem; right: -2rem;">TAMUNIUM</span>
+
+  <div class="section-label">02 — The Founder</div>
+
+  <div class="chef-badge reveal">
+    <div class="chef-badge-dot"></div>
+    <span>Chef · Entrepreneur · System Architect</span>
+  </div>
+
+  <div class="reveal">
+    <h2>He Didn't Apply for the Job.<br/><em>He Cooked His Way In.</em></h2>
+  </div>
+
+  <div class="two-col" style="margin-top: 3rem;">
+    <div class="reveal">
+      <p>Akien Kubie — known in the creative world as TAMUNIUM — is a professional chef and founder with deep roots in Nigerian cuisine, particularly the flavours and traditions of the Niger Delta. He didn't take a conventional path into the Port Harcourt food industry.</p>
+      <p>At Rubicon Restaurant Bar and Lounge in Trans Amadi, he passed a cooking test using a technique he had discovered and named himself: the <strong style="color: var(--gold-light);">Double Coconut Method</strong> — rendering coconut oil from fresh coconut water to toast rice before cooking, creating a depth of flavour that standard cooking methods cannot replicate.</p>
+      <p>That test earned him employment. But employment was never the destination — it was the launchpad.</p>
+    </div>
+    <div class="reveal">
+      <div class="highlight-box">
+        <h3>The Double Coconut Method</h3>
+        <p style="max-width: none;">A self-developed culinary technique in which coconut oil is rendered directly from fresh coconut water to toast rice before cooking. The result is a complex, layered flavour profile that cannot be achieved through conventional methods — and a signature that belongs exclusively to the Bottom Pot kitchen.</p>
+      </div>
+      <p>Akien is not just a chef working at Rubicon. He is the CEO of Bottom Pot — an African SME Business Operating System built on AppSheet and Google Sheets — using his chef income to fund the platform's development while building its first public activation inside the very restaurant that hired him.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SOLUTION ═══════════════════════════════ -->
+<section>
+  <div class="section-label">03 — The Activation</div>
+
+  <div class="reveal">
+    <h2>Bottom Pot <em>Live Kitchen</em><br/>at Rubicon — Every Saturday.</h2>
+  </div>
+
+  <div class="two-col" style="margin-top: 3rem;">
+    <div>
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">The Concept</div>
+          <h3>Live. Outdoor. Communal.</h3>
+          <p>The Bottom Pot Live Kitchen is a weekly outdoor cooking experience hosted at Rubicon's premises every Saturday. Guests don't just eat — they watch, engage, and participate in a curated culinary event built around Nigerian flavour, live fire, and the story behind each dish.</p>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">The Model</div>
+          <h3>Revenue-Sharing, Not Just a Pop-Up.</h3>
+          <p>Bottom Pot and Rubicon operate under a structured arrangement — the platform drives audience, handles digital ordering and tracking, and receives a platform fee per transaction. Rubicon provides the venue, kitchen infrastructure, and staff. Both parties grow together.</p>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">The Technology</div>
+          <h3>Every Order Is a Data Point.</h3>
+          <p>Every transaction at the Live Kitchen runs through the Bottom Pot platform — built on a 17-table Google Sheets master database with AppSheet front-end. Customer orders, cook performance, rider dispatch, and revenue tracking are all captured and usable from day one.</p>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Launch Target</div>
+          <h3>Saturday, April 18, 2026.</h3>
+          <p>The first Bottom Pot Live Kitchen activation is targeted for Saturday, April 18, 2026 — a defined, costed, publicly committed milestone. The date is not a hope. It is a plan with a cost model behind it.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="highlight-box" style="margin-top: 0;">
+        <h3>What Makes This Different</h3>
+        <p style="max-width: none;">Most restaurant pop-ups are events. The Bottom Pot Live Kitchen is an <em style="color: var(--gold-light);">infrastructure test</em>. It is the first real-world deployment of the Bottom Pot platform — a weekly stress test of the ordering system, the logistics model, the cost structure, and the brand, in front of a live Port Harcourt audience.</p>
+        <p style="max-width: none; margin-top: 1rem;">Every Saturday becomes a dataset. Every dataset improves the platform. Every improvement makes the system more attractive to the next hotel, restaurant, or food entrepreneur who joins Bottom Pot's ecosystem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ BUSINESS MODEL ═══════════════════════════════ -->
+<section style="background: var(--dark-2);">
+  <div class="section-label">04 — The Model</div>
+
+  <div class="reveal">
+    <h2>Built to Scale.<br/><em>Priced for Nigeria.</em></h2>
+  </div>
+
+  <div class="model-cards">
+
+    <div class="model-card reveal">
+      <div class="model-card-icon">🧾</div>
+      <h3>Flat Platform Fee</h3>
+      <p>₦100 per order placed through the Bottom Pot system — predictable, low-friction, and volume-driven.</p>
+    </div>
+
+    <div class="model-card reveal">
+      <div class="model-card-icon">📊</div>
+      <h3>3% Commission</h3>
+      <p>A 3% commission on every food order processed through the platform, aligned with restaurant performance.</p>
+    </div>
+
+    <div class="model-card reveal">
+      <div class="model-card-icon">🏨</div>
+      <h3>Hotel Management Vertical</h3>
+      <p>Room availability, guest tracking, and smart automation — a full hotel OS for Nigerian hospitality businesses.</p>
+    </div>
+
+    <div class="model-card reveal">
+      <div class="model-card-icon">🌾</div>
+      <h3>Farmer Marketplace</h3>
+      <p>A direct-to-kitchen produce marketplace connecting Port Harcourt farmers with restaurants on the platform.</p>
+    </div>
+
+    <div class="model-card reveal">
+      <div class="model-card-icon">💰</div>
+      <h3>Akawo Auto-Savings</h3>
+      <p>Modelled on traditional Nigerian contribution savings — auto-deducting a percentage per transaction into a 30-day locked wallet for merchants.</p>
+    </div>
+
+    <div class="model-card reveal">
+      <div class="model-card-icon">🌱</div>
+      <h3>BioEnergy Vertical</h3>
+      <p>Biogas generation from organic waste produced by restaurants and hotels — closing the loop on Nigeria's food system.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PROJECTIONS ═══════════════════════════════ -->
+<section class="vision-bg">
+  <div class="section-label">05 — The Projection</div>
+
+  <div class="reveal">
+    <h2>What Happens When<br/>the Kitchen <em>Goes Live.</em></h2>
+  </div>
+
+  <p class="reveal">These projections are rooted in a structured cost model developed ahead of the April 11 launch. They represent conservative outcomes based on Port Harcourt market conditions, Rubicon's existing customer base, and the Bottom Pot platform's capacity at launch.</p>
+
+  <div class="stats-grid reveal">
+    <div class="stat-box">
+      <div class="stat-number">52</div>
+      <div class="stat-label">Weekly activations per year</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">₦100</div>
+      <div class="stat-label">Platform fee per order</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">3%</div>
+      <div class="stat-label">Commission per transaction</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">17</div>
+      <div class="stat-label">Tables in the master database</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">5+</div>
+      <div class="stat-label">Platform verticals at launch</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">Apr 18</div>
+      <div class="stat-label">First activation date</div>
+    </div>
+  </div>
+
+  <div class="pull-quote reveal" style="margin-top: 5rem;">
+    <blockquote>"Rubicon is not the destination. It is the proof of concept — the first node in what becomes a network."</blockquote>
+    <cite>Akien Kubie · Founder & CEO, Bottom Pot</cite>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ NEXT MOVES ═══════════════════════════════ -->
+<section>
+  <div class="section-label">06 — What's Next</div>
+
+  <div class="two-col">
+    <div class="reveal">
+      <h2>After Rubicon,<br/><em>Every Restaurant<br/>Is a Candidate.</em></h2>
+    </div>
+    <div class="reveal">
+      <p>The Live Kitchen activation at Rubicon is not a one-off campaign. It is Bottom Pot's proof-of-concept deployment — designed to demonstrate that the platform can power a real hospitality business in Port Harcourt's competitive market.</p>
+      <p>Following the April 11 launch, the roadmap includes: platform expansion to additional restaurants and hotels in Port Harcourt, formal CAC incorporation of Bottom Pot Limited, growth of the Farmer Marketplace and Akawo savings features, and exploration of IoT smart-room integration for hotel clients.</p>
+      <p>The goal is full platform independence within 12 months — funded by Rubicon income, proven by Live Kitchen data, and scaled through the relationships this activation builds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CTA ═══════════════════════════════ -->
+<section class="cta-section">
+  <div class="section-label" style="justify-content: center;">07 — Get Involved</div>
+
+  <h2 class="reveal">This Kitchen<br/>Has <em>Room for You.</em></h2>
+
+  <p class="reveal">Whether you're a restaurant owner looking for operational infrastructure, an investor tracking African food tech, a food entrepreneur in Port Harcourt, or a hospitality brand that wants to understand what a modern Nigerian restaurant OS looks like — Bottom Pot is building for you.</p>
+
+  <div class="cta-links reveal">
+    <a class="btn btn-primary" href="https://wa.me/2349155154066?text=Hi%20Akien%2C%20I%27d%20like%20to%20partner%20with%20Bottom%20Pot" target="_blank">Partner with Bottom Pot</a>
+    <a class="btn btn-outline" href="https://wa.me/2349155154066?text=Hi%20Akien%2C%20I%27d%20like%20to%20join%20the%20Bottom%20Pot%20Live%20Kitchen" target="_blank">Join the Live Kitchen</a>
+    <a class="btn btn-outline" href="mailto:akienkubie@gmail.com?subject=Bottom%20Pot%20Enquiry" target="_blank">Talk to the Founder</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="footer-brand">Bottom Pot ✦ TAMUNIUM</div>
+  <div class="footer-note">Port Harcourt, Rivers State · Nigeria · 2026</div>
+  <div class="footer-note">Africa's SME Business Operating System</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.delay || 0;
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach((el, i) => {
+    el.dataset.delay = (i % 3) * 80;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
